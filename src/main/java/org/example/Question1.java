@@ -10,9 +10,9 @@ public class Question1 {
             int count = 1;
             if (eachWordCount.containsKey(word)) {
                 count = eachWordCount.get(word) + 1;
-                eachWordCount.put(word, count);
+                eachWordCount.put(word.toLowerCase(), count);
             } else {
-                eachWordCount.put(word, count);
+                eachWordCount.put(word.toLowerCase(), count);
             }
         }
         return eachWordCount;
@@ -22,6 +22,7 @@ public class Question1 {
     public static Map<String, Integer> mostCommon (List<String> listOfWords, int count){
         Map<String, Integer> eachWord = wordsCount(listOfWords);
         Map<String, Integer> mostCommon = new HashMap<>();
+
         //get words with most occurence
         for (int i = 0; i < count; i++) {
             String maxWord = "";

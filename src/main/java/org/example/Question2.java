@@ -11,6 +11,7 @@ public class Question2 {
             if(check.charAt(i) != check.charAt(len))
                 return false;
         }
+
         return true;
     }
 
