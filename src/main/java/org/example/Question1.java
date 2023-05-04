@@ -4,24 +4,26 @@ import java.io.*;
 import java.util.*;
 
 public class Question1 {
-
-
-    public static Map<String, Integer> mostCommon (List<String> listOfWords){
-        Map<String, Integer> eachWord = new HashMap<>();
-        Map<String, Integer> mostCommon = new HashMap<>();
+    public  static  Map<String, Integer> wordsCount (List<String> listOfWords){
+        Map<String, Integer> eachWordCount = new HashMap<>();
         for (String word : listOfWords) {
             int count = 1;
-//            word.toLowerCase();
-            if (eachWord.containsKey(word)) {
-                count = eachWord.get(word) + 1;
-                eachWord.put(word, count);
+            if (eachWordCount.containsKey(word)) {
+                count = eachWordCount.get(word) + 1;
+                eachWordCount.put(word, count);
             } else {
-                eachWord.put(word, count);
+                eachWordCount.put(word, count);
             }
         }
+        return eachWordCount;
+    }
 
+
+    public static Map<String, Integer> mostCommon (List<String> listOfWords, int count){
+        Map<String, Integer> eachWord = wordsCount(listOfWords);
+        Map<String, Integer> mostCommon = new HashMap<>();
         //get words with most occurence
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < count; i++) {
             String maxWord = "";
             int max = 0;
             for (Map.Entry<String, Integer> eachMapEntry : eachWord.entrySet()) {
@@ -37,36 +39,24 @@ public class Question1 {
         return mostCommon;
     }
 
-    public static Map<String, Integer> leastCommon (List<String> listOfWords){
-        Map<String, Integer> eachWord = new HashMap<>();
+    public static Map<String, Integer> leastCommon (List<String> listOfWords, int count){
+        Map<String, Integer> eachWord = wordsCount(listOfWords);
         Map<String, Integer> leastCommon = new HashMap<>();
-        for (String word : listOfWords) {
-            int count = 1;
-//            word.toLowerCase();
-            if (eachWord.containsKey(word)) {
-                count = eachWord.get(word) + 1;
-                eachWord.put(word, count);
-            } else {
-                eachWord.put(word, count);
-            }
-        }
 
         //get words with most occurence
-        for (int i = 0; i < 3; i++) {
-            String maxWord = "";
+        for (int i = 0; i < count; i++) {
+            String minWord = "";
             int min = (int) eachWord.values().toArray()[0];
-            System.out.println(min);
-
 
             for (Map.Entry<String, Integer> eachMapEntry : eachWord.entrySet()) {
-                if (eachMapEntry.getValue() > min) {
+                if (eachMapEntry.getValue() <= min) {
                     min = eachMapEntry.getValue();
-                    maxWord = eachMapEntry.getKey();
+                    minWord = eachMapEntry.getKey();
                 }
 
             }
-            leastCommon.put(maxWord,min);
-            eachWord.remove(maxWord);
+            leastCommon.put(minWord,min);
+            eachWord.remove(minWord);
         }
         return leastCommon;
     }
